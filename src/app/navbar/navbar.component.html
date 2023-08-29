@@ -1,0 +1,35 @@
+<div class="w-full p-10 shadow-md shadow-pink-600">
+  <div class="flex justify-between items-center">
+    <div class="text-3xl text-pink-600 uppercase tracking-widest">Job Trek</div>
+    <div class="flex gap-5 items-center">
+      <a
+        routerLink="/login"
+        routerLinkActive="active"
+        class="link"
+        *ngIf="!isAuthenticated()"
+        >Login</a
+      >
+      <a
+        routerLink="/register"
+        routerLinkActive="active"
+        class="link"
+        *ngIf="!isAuthenticated()"
+        >Register</a
+      >
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        class="link"
+        *ngIf="isAuthenticated()"
+        >Home</a
+      >
+      <a
+        routerLink="/logout"
+        routerLinkActive="active"
+        class="link"
+        *ngIf="isAuthenticated()"
+        >Logout</a
+      >
+    </div>
+  </div>
+</div>

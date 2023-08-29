@@ -1,0 +1,191 @@
+<div class="flex flex-col justify-center items-center mt-32">
+  <app-box>
+    <div
+      class="text-center mb-5 text-3xl text-pink-600 uppercase tracking-widest"
+    >
+      Register
+    </div>
+    <div
+      class="mb-5 border border-red-700 bg-red-300 text-red-700 px-5 py-3 w-full text-center"
+      *ngIf="error"
+    >
+      {{ error }}
+    </div>
+
+    <form [formGroup]="registerForm" class="w-96" (ngSubmit)="register()">
+      <div class="form-field">
+        <label
+          for="fname"
+          [ngClass]="{
+            'error-text':
+              registerForm.controls['firstName'].invalid &&
+              registerForm.controls['firstName'].touched
+          }"
+        >
+          First Name
+        </label>
+        <input
+          type="text"
+          id="fname"
+          formControlName="firstName"
+          [ngClass]="{
+            'form-input': true,
+            'error-input':
+              registerForm.controls['firstName'].touched &&
+              registerForm.controls['firstName'].invalid
+          }"
+        />
+        <small
+          [ngClass]="{ 'error-text':  registerForm.controls['firstName'].errors?.['required'] && registerForm.controls['firstName'].touched}"
+          *ngIf="
+                  registerForm.controls['firstName'].errors?.['required'] && registerForm.controls['firstName'].touched"
+          >First Name is Required</small
+        >
+      </div>
+      <div class="form-field">
+        <label
+          for="lname"
+          [ngClass]="{
+            'error-text':
+              registerForm.controls['lastName'].invalid &&
+              registerForm.controls['lastName'].touched
+          }"
+        >
+          Last Name
+        </label>
+        <input
+          type="text"
+          id="lname"
+          formControlName="lastName"
+          [ngClass]="{
+            'form-input': true,
+            'error-input':
+              registerForm.controls['lastName'].touched &&
+              registerForm.controls['lastName'].invalid
+          }"
+        />
+        <small
+          [ngClass]="{ 'error-text':  registerForm.controls['lastName'].errors?.['required'] && registerForm.controls['lastName'].touched}"
+          *ngIf="
+                  registerForm.controls['lastName'].errors?.['required'] && registerForm.controls['lastName'].touched"
+          >Last Name is Required</small
+        >
+      </div>
+      <div class="form-field">
+        <label
+          for="email"
+          [ngClass]="{
+            'error-text':
+              registerForm.controls['email'].invalid &&
+              registerForm.controls['email'].touched
+          }"
+        >
+          Email
+        </label>
+        <input
+          type="text"
+          id="email"
+          formControlName="email"
+          [ngClass]="{
+            'form-input': true,
+            'error-input':
+              registerForm.controls['email'].touched &&
+              registerForm.controls['email'].invalid
+          }"
+        />
+        <small
+          [ngClass]="{ 'error-text':  registerForm.controls['email'].errors?.['required'] && registerForm.controls['email'].touched}"
+          *ngIf="
+              registerForm.controls['email'].errors?.['required'] && registerForm.controls['email'].touched"
+          >Email is Required</small
+        >
+        <small
+          [ngClass]="{ 'error-text':  registerForm.controls['email'].errors?.['email'] && registerForm.controls['email'].touched}"
+          *ngIf="
+            registerForm.controls['email'].errors?.['email'] && registerForm.controls['email'].touched"
+          >Invalid Email Format</small
+        >
+      </div>
+      <div class="form-field">
+        <label
+          for="password"
+          [ngClass]="{
+            'error-text':
+              registerForm.controls['password'].invalid &&
+              registerForm.controls['password'].touched
+          }"
+        >
+          Password
+        </label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          [ngClass]="{
+            'form-input': true,
+            'error-input':
+              registerForm.controls['password'].touched &&
+              registerForm.controls['password'].invalid
+          }"
+        />
+        <small
+          [ngClass]="{ 'error-text':  registerForm.controls['password'].errors?.['required'] && registerForm.controls['password'].touched}"
+          *ngIf="
+              registerForm.controls['password'].errors?.['required'] && registerForm.controls['password'].touched"
+          >Password is Required</small
+        >
+      </div>
+      <div class="form-field">
+        <label
+          for="cpassword"
+          [ngClass]="{
+            'error-text':
+            (registerForm.controls['confirmPassword'].touched &&
+            registerForm.controls['confirmPassword'].invalid) || (registerForm.errors?.['matchFields'] && registerForm.controls['confirmPassword'].touched)
+          }"
+        >
+          Confirm Password
+        </label>
+        <input
+          type="password"
+          id="cpassword"
+          formControlName="confirmPassword"
+          [ngClass]="{
+            'form-input': true,
+            'error-input':
+              (registerForm.controls['confirmPassword'].touched &&
+              registerForm.controls['confirmPassword'].invalid) || (registerForm.errors?.['matchFields'] && registerForm.controls['confirmPassword'].touched)
+          }"
+        />
+        <small
+          [ngClass]="{ 'error-text':  registerForm.controls['confirmPassword'].errors?.['required'] && registerForm.controls['confirmPassword'].touched}"
+          *ngIf="
+              registerForm.controls['confirmPassword'].errors?.['required']  && registerForm.controls['confirmPassword'].touched"
+          >Confirm Password is Required</small
+        >
+        <small
+          [ngClass]="{ 'error-text':  registerForm.controls['confirmPassword'].errors?.['required'] && registerForm.controls['confirmPassword'].touched}"
+          *ngIf="
+              registerForm.controls['confirmPassword'].errors?.['required'] && registerForm.controls['confirmPassword'].touched"
+          >Confirm Password is Required</small
+        >
+        <small
+          [ngClass]="{ 'error-text': registerForm.errors?.['matchFields'] && registerForm.controls['confirmPassword'].touched
+    }"
+          *ngIf="
+            registerForm.errors?.['matchFields'] && registerForm.controls['confirmPassword'].touched
+          "
+        >
+          Passwords do not match.
+        </small>
+      </div>
+      <button
+        [disabled]="registerForm.invalid"
+        type="submit"
+        class="bg-pink-600 text-white w-full p-2 rounded-full mt-5 disabled:bg-gray-200 disabled:text-gray-700 disabled:pointer-events-none hover:border hover:border-pink-600 hover:bg-white hover:text-pink-600"
+      >
+        Register
+      </button>
+    </form>
+  </app-box>
+</div>

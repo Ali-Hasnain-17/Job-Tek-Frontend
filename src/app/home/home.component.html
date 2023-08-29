@@ -1,0 +1,7 @@
+<div
+  class="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 m-10 justify-center gap-3"
+>
+  <app-box *ngFor="let job of jobs">
+    <app-job-card [job]="job"></app-job-card>
+  </app-box>
+</div>

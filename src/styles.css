@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.link {
+  @apply text-pink-600;
+}
+
+.active {
+  @apply text-white bg-pink-600 px-3 py-2 rounded-sm;
+}
+
+.form-field {
+  @apply flex flex-col gap-2 mb-5;
+}
+
+.form-input {
+  @apply p-3 bg-gray-200;
+}
+
+.error-input {
+  @apply bg-red-200 text-red-700 border border-red-700 outline-none;
+}
+
+.error-text {
+  @apply text-red-700;
+}
+
+.truncate-vertically-opacity {
+  @apply line-clamp-3 opacity-75 overflow-hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Adjust as needed */
+  -webkit-box-orient: vertical;
+}
