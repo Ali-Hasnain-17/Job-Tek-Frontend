@@ -18,16 +18,12 @@ export class JwtInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     const token = JSON.parse(localStorage.getItem('token')!) || undefined;
 
-    if (token) {
-      const modifiedRequest = request.clone({
-        url: `${environment.basUrl}${request.url}`,
-        setHeaders: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return next.handle(modifiedRequest);
-    }
-
-    return next.handle(request);
+    const modifiedRequest = request.clone({
+      url: `${environment.basUrl}${request.url}`,
+      setHeaders: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return next.handle(modifiedRequest);
   }
 }

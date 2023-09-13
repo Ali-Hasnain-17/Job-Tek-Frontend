@@ -1,0 +1,116 @@
+<div class="mt-10 flex flex-col justify-center items-center gap-4">
+  <h2 class="text-4xl heading-text">Create Job</h2>
+  <form
+    class="flex flex-col md:w-1/2 md:px-0 w-full px-10"
+    [formGroup]="createJobForm"
+    (ngSubmit)="createJob()"
+  >
+    <div class="form-field">
+      <label for="title">Title</label>
+      <input type="text" class="form-input" formControlName="title" />
+      <small
+        *ngIf="createJobForm.get('title')?.touched && createJobForm.get('title')?.errors?.['required']"
+      >
+        Title is required
+      </small>
+    </div>
+    <div class="form-field">
+      <label for="shortDescription">Short Description</label>
+      <textarea
+        id="shortDescription"
+        rows="5"
+        class="form-input resize-none"
+        formControlName="shortDescription"
+      >
+      </textarea>
+      <small
+        *ngIf="createJobForm.get('shortDescription')?.touched && createJobForm.get('description')?.errors?.['required']"
+      >
+        Short Description is required
+      </small>
+    </div>
+    <div class="form-field">
+      <label for="description">Detailed Decription</label>
+      <div class="editor">
+        <editor
+          formControlName="detailedDescription"
+          [apiKey]="apiKey"
+          [init]="{
+            height: 500,
+            menubar: false,
+            plugins:
+              'advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste code help wordcount fontsize',
+            toolbar:
+              'undo redo | formatselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | fontsize',
+            font_size_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt'
+          }"
+        >
+        </editor>
+      </div>
+      <small
+        *ngIf="createJobForm.get('detailedDescription')?.touched && createJobForm.get('detailedDescription')?.errors?.['required']"
+      >
+        Detailed Description is required
+      </small>
+    </div>
+    <div class="form-field">
+      <label for="companyName">Company Name</label>
+      <input
+        id="companyName"
+        type="text"
+        class="form-input"
+        formControlName="companyName"
+      />
+      <small
+        *ngIf="createJobForm.get('companyName')?.touched && createJobForm.get('companyName')?.errors?.['required']"
+      >
+        Company Name is required
+      </small>
+    </div>
+    <div class="form-field">
+      <label for="mode">Mode</label>
+      <select id="mode" class="form-input" formControlName="mode">
+        <option value="On Site">On Site</option>
+        <option value="Hybrid">Hybrid</option>
+        <option value="Remote">Remote</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="experience">Experience</label>
+      <select id="experience" class="form-input" formControlName="experience">
+        <option value="Entry">Entry</option>
+        <option value="Mid/Senior">Mid Senior</option>
+        <option value="Senior">Senior</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="type">Type</label>
+      <select id="type" class="form-input" formControlName="type">
+        <option value="Full Time">Full Time</option>
+        <option value="Part Time">Part Time</option>
+        <option value="Internship">Internship</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="location">Location</label>
+      <input
+        id="location"
+        type="text"
+        class="form-input"
+        formControlName="location"
+      />
+      <small
+        *ngIf="createJobForm.get('location')?.touched && createJobForm.get('location')?.errors?.['required']"
+      >
+        Location is required
+      </small>
+    </div>
+    <button
+      [disabled]="createJobForm.invalid"
+      type="submit"
+      class="btn-primary w-full p-2 mt-5 mb-10"
+    >
+      Create Job
+    </button>
+  </form>
+</div>

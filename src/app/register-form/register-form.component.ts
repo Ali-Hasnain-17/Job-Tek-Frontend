@@ -29,6 +29,7 @@ export class RegisterFormComponent implements OnInit {
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
+        contactNumber: ['', Validators.required],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required],
       },
@@ -39,7 +40,7 @@ export class RegisterFormComponent implements OnInit {
   register() {
     if (this.registerForm.valid) {
       this.authService
-        .register({ ...this.registerForm.value, role: 'job seeker' })
+        .register({ ...this.registerForm.value, role: 'Job Seeker' })
         .subscribe({
           next: (_) => {
             this.router.navigate(['login']);

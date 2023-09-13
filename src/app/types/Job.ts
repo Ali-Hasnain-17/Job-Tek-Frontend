@@ -1,13 +1,13 @@
 export interface Job {
-  id: string;
+  id?: string;
   title: string;
-  description: string;
+  shortDescription: string;
+  detailedDescription: string;
   companyName: string;
   type: string;
-  applyUrl: string;
-  experienceLevel: number;
-  applicants: number;
-  city: string;
-  country: string;
-  postedAt: Date;
+  mode: string;
+  experience: string;
+  applicants?: number;
+  location: string;
+  postedAt?: Date;
 }

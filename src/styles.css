@@ -2,12 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+ul {
+  @apply list-disc pl-5
+}
+
+ol {
+  @apply list-decimal pl-5
+}
+
 .link {
-  @apply text-pink-600;
+  @apply text-pink-600
 }
 
 .active {
-  @apply text-white bg-pink-600 px-3 py-2 rounded-sm;
+  @apply text-white bg-pink-600 md:px-3 md:py-2 px-2 py-1 rounded-sm
 }
 
 .form-field {
@@ -15,20 +23,46 @@
 }
 
 .form-input {
-  @apply p-3 bg-gray-200;
+  @apply lg:p-3 p-2 border-2 border-gray-200 outline-pink-600 rounded-md;
 }
 
-.error-input {
-  @apply bg-red-200 text-red-700 border border-red-700 outline-none;
+input.ng-touched.ng-invalid,
+textarea.ng-touched.ng-invalid {
+  @apply border-2 border-red-500 outline-none;
 }
 
-.error-text {
-  @apply text-red-700;
+.editor .ng-invalid.ng-touched {
+  @apply border-2 border-red-500 rounded-lg
 }
 
-.truncate-vertically-opacity {
-  @apply line-clamp-3 opacity-75 overflow-hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3; /* Adjust as needed */
-  -webkit-box-orient: vertical;
+input.ng-invalid.ng-touched + small,
+textarea.ng-invalid.ng-touched + small,
+.editor + small {
+  @apply text-red-500
+}
+
+label:has(+ input.ng-invalid.ng-touched),
+label:has(+ textarea.ng-invalid.ng-touched),
+label:has(+ .editor .ng-invalid.ng-touched) {
+  @apply text-red-500
+}
+
+.badge {
+  @apply bg-pink-600 rounded-full text-white md:text-sm md:px-3 md:py-1 px-2 py-1 text-xs
+}
+
+.btn-primary {
+  @apply bg-pink-600 text-white rounded-md disabled:bg-gray-200 disabled:text-gray-700 disabled:pointer-events-none hover:border hover:border-pink-600 hover:bg-white hover:text-pink-600
+}
+
+.btn-secondry {
+  @apply bg-black text-white rounded-md disabled:bg-gray-200 disabled:text-gray-700 disabled:pointer-events-none hover:border hover:border-black hover:bg-white hover:text-black
+}
+
+.error-box {
+  @apply mb-5 border border-red-700 bg-red-300 text-red-700 px-5 py-3 text-center
+}
+
+.heading-text {
+  @apply font-bold uppercase lg:tracking-widest tracking-normal
 }

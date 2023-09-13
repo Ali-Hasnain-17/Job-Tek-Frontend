@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Job } from '../types/Job';
 import { Router } from '@angular/router';
+import { formatDistance } from 'date-fns';
 
 @Component({
   selector: 'app-job-card',
@@ -10,13 +11,16 @@ import { Router } from '@angular/router';
 export class JobCardComponent {
   @Input() job!: Job;
 
-  getExperience(experienceLevel: number) {
-    if (experienceLevel >= 4) {
-      return 'Senior';
-    } else if (experienceLevel <= 4 && experienceLevel >= 2) {
-      return 'Mid/Senior';
-    } else {
-      return 'Entry';
-    }
+  constructor(public router: Router) {}
+
+  getPlural(number: number, singular: string, plural: string) {
+    const pluralRules = new Intl.PluralRules();
+    return pluralRules.select(number) === 'one' ? singular : plural;
+  }
+
+  timeAgo(date: Date) {
+    return formatDistance(new Date(date), new Date(), {
+      addSuffix: true,
+    });
   }
 }

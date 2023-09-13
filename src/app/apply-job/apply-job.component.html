@@ -1,0 +1,96 @@
+<div class="mt-10 flex flex-col justify-center items-center gap-4">
+  <h2 class="text-xl lg:text-4xl heading-text">Apply For Job</h2>
+  <div class="error-box md:w-1/2 w-full" *ngIf="error">{{ error }}</div>
+  <form
+    class="flex flex-col md:w-1/2 w-full px-10"
+    [formGroup]="applyJobForm"
+    (ngSubmit)="applyForJob()"
+  >
+    <div class="form-field">
+      <label for="name">Name</label>
+      <input id="name" type="text" class="form-input" formControlName="name" />
+      <small
+        *ngIf="applyJobForm.get('name')?.touched && applyJobForm.get('name')?.errors?.['required']"
+      >
+        Name is required
+      </small>
+    </div>
+
+    <div class="form-field">
+      <label for="experience">Experience (in years)</label>
+      <input
+        id="experience"
+        type="number"
+        class="form-input"
+        formControlName="experience"
+        step="0.1"
+      />
+      <small
+        *ngIf="applyJobForm.get('experience')?.touched && applyJobForm.get('experience')?.errors?.['required']"
+      >
+        Experience is required
+      </small>
+    </div>
+
+    <div class="form-field">
+      <label for="githubUrl">Github Url (optional)</label>
+      <input
+        id="githubUrl"
+        type="url"
+        class="form-input"
+        formControlName="githubUrl"
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="linkedinUrl">Linkedin Url (optional)</label>
+      <input
+        id="linkedinUrl"
+        type="url"
+        class="form-input"
+        formControlName="linkedinUrl"
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="resume">Upload Resume</label>
+      <input
+        id="resume"
+        type="file"
+        class="form-input hidden"
+        #resume
+        (change)="selectResume($event)"
+      />
+      <div class="flex justify-between">
+        <div class="flex gap-1 items-center">
+          <button
+            (click)="resume.click()"
+            class="btn-secondry p-2 md:text-md text-sm"
+          >
+            Select Resume
+          </button>
+          <span class="text-xs font-bold md:text-sm" *ngIf="!resumeFileName">
+            Please Select your resume
+          </span>
+          <span class="text-xs font-bold md:text-sm" *ngIf="resumeFileName">
+            {{ resumeFileName }} selected
+          </span>
+        </div>
+        <button
+          [disabled]="!resumeFileName"
+          (click)="uploadResume()"
+          class="btn-primary p-2 md:text-md text-sm"
+        >
+          Upload Resume
+        </button>
+      </div>
+    </div>
+    <button
+      [disabled]="applyJobForm.invalid || !resumeUrl"
+      type="submit"
+      class="bg-pink-600 text-white w-full p-2 rounded-md mt-5 disabled:bg-gray-200 disabled:text-gray-700 disabled:pointer-events-none hover:border hover:border-pink-600 hover:bg-white hover:text-pink-600 mb-10"
+    >
+      Apply For Job
+    </button>
+  </form>
+</div>

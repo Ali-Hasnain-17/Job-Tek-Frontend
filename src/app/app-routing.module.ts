@@ -6,14 +6,23 @@ import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AlreadyAuthGuard } from './guards/already-auth.guard';
 import { JobDetailsComponent } from './job-details/job-details.component';
+import { CreateJobComponent } from './create-job/create-job.component';
+import { ApplyJobComponent } from './apply-job/apply-job.component';
+import { ApplicationSubmitSuccessComponent } from './application-submit-success/application-submit-success.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/job', pathMatch: 'full' },
   {
-    path: 'details/:id',
-    component: JobDetailsComponent,
+    path: 'job',
     canActivate: [AuthGuard],
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'details/:id', component: JobDetailsComponent },
+      { path: 'apply/success', component: ApplicationSubmitSuccessComponent },
+      { path: 'apply/:id', component: ApplyJobComponent },
+    ],
   },
+  { path: 'create', canActivate: [AuthGuard], component: CreateJobComponent },
   {
     path: 'login',
     component: LoginFormComponent,

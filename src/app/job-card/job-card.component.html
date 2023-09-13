@@ -1,38 +1,52 @@
-<div class="flex justify-between items-start">
-  <div class="flex flex-col">
-    <div class="uppercase text-xl font-bold mb-2">{{ job.title }}</div>
-    <div class="text-gray-600 text-sm">{{ job.companyName }}</div>
-    <div class="text-gray-600 text-sm">{{ job.city }}, {{ job.country }}</div>
+<div class="w-full flex flex-col items-center">
+  <div class="flex flex-col justify-between items-start gap-3 w-full">
+    <div class="flex justify-between w-full items-center">
+      <div class="lg:text-xl sm:text-md text-sm heading-text">
+        {{ job.title }}
+      </div>
+      <div class="text-pink-600 font-bold lg:text-md md:text-sm text-xs">
+        {{ job.applicants }}
+        {{ getPlural(job.applicants!, "applicant", "applicants") }}
+      </div>
+    </div>
+    <div class="flex gap-2">
+      <div class="badge">
+        {{ job.type }}
+      </div>
+      <div class="badge">
+        {{ job.mode }}
+      </div>
+      <div class="badge">
+        {{ job.experience }}
+      </div>
+    </div>
+    <div
+      class="flex md:justify-between md:items-center w-full md:flex-row flex-col"
+    >
+      <div class="flex flex-col items-center">
+        <div class="text-md font-bold">Company</div>
+        <div class="text-sm">{{ job.companyName }}</div>
+      </div>
+      <div class="flex flex-col items-center">
+        <div class="text-md font-bold">Location</div>
+        <div class="text-sm">{{ job.location }}</div>
+      </div>
+      <div class="flex flex-col items-center">
+        <div class="text-md font-bold">Posted At</div>
+        <div class="text-sm">{{ timeAgo(job.postedAt!) }}</div>
+      </div>
+    </div>
   </div>
-  <div class="text-sm text-pink-600 w-32 text-end">
-    {{ job.applicants }} applicants
+  <div class="border border-black border-dotted w-full my-3"></div>
+  <div class="mb-2 text-justify self-start overflow-clip h-12">
+    {{ job.shortDescription }}
   </div>
-</div>
-
-<div class="flex gap-2 mt-5">
-  <div
-    class="text-white text-xs bg-pink-600 px-3 rounded-full flex items-center"
-  >
-    {{ job.type }}
+  <div class="flex w-full">
+    <button
+      (click)="router.navigate(['job', 'details', job.id])"
+      class="btn-secondry mt-2 py-1 w-full text-sm"
+    >
+      Learn More
+    </button>
   </div>
-  <div
-    class="text-white text-xs bg-pink-600 px-3 py-1 rounded-full flex items-center"
-  >
-    {{ getExperience(job.experienceLevel) }}
-  </div>
-</div>
-
-<div class="mt-5 text-md h-20 max-h-20 overflow-hidden">
-  <p class="truncate-vertically-opacity">
-    {{ job.description }}
-  </p>
-</div>
-
-<div class="flex w-full justify-end">
-  <button
-    routerLink="/details/{{ job.id }}"
-    class="bg-black rounded-full px-3 py-1 text-white"
-  >
-    Learn More
-  </button>
 </div>

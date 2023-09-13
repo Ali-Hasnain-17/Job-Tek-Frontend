@@ -1,21 +1,58 @@
-<div class="w-full h-96 flex flex-col items-center">
-  <div class="py-10 px-3 w-1/2 flex justify-between items-start">
-    <div class="flex flex-col">
-      <div class="uppercase text-3xl font-bold mb-2">{{ job.title }}</div>
-      <div class="text-gray-600 text-md">{{ job.companyName }}</div>
-      <div class="text-gray-600 text-md">{{ job.city }}, {{ job.country }}</div>
+<div class="w-full flex flex-col items-center">
+  <div class="mt-10 w-3/4 px-3 cursor-pointer" (click)="router.navigate(['/'])">
+    <img src="assets/arrow-left.png" alt="back" width="30" height="30" />
+  </div>
+  <div class="p-3 w-3/4 flex flex-col justify-between items-start gap-3">
+    <div class="flex justify-between w-full items-center">
+      <div class="lg:text-2xl sm:text-lg text-md heading-text">
+        {{ job.title }}
+      </div>
+      <div class="text-pink-600 font-bold text-xs sm:text-md md:text-lg">
+        {{ job.applicants }}
+        {{ getPlural(job.applicants!, "applicant", "applicants") }}
+      </div>
     </div>
-    <div class="text-md text-pink-600 w-32 text-end mt-2">
-      {{ job.applicants }} applicants
+    <div class="flex gap-2">
+      <div class="badge">
+        {{ job.type }}
+      </div>
+      <div class="badge">
+        {{ job.mode }}
+      </div>
+      <div class="badge">
+        {{ job.experience }}
+      </div>
+    </div>
+    <div class="flex justify-between items-center w-full md:flex-row flex-col">
+      <div class="flex flex-col items-center">
+        <div class="text-md font-bold">Company</div>
+        <div class="text-sm">{{ job.companyName }}</div>
+      </div>
+      <div class="flex flex-col items-center">
+        <div class="text-md font-bold">Location</div>
+        <div class="text-sm">{{ job.location }}</div>
+      </div>
+      <div class="flex flex-col items-center">
+        <div class="text-md font-bold">Posted At</div>
+        <div class="text-sm">{{ timeAgo(job.postedAt!) }}</div>
+      </div>
     </div>
   </div>
-  <div class="w-1/2 border border-dashed border-black"></div>
-  <div class="py-5 px-3 w-1/2">
-    {{ job.description }}
-  </div>
-  <div class="w-1/2">
-    <button class="bg-black rounded-full mt-5 px-3 py-1 text-white w-full">
-      Apply Now
+  <div class="border border-black border-dotted w-3/4"></div>
+  <div class="p-3 w-3/4" #detailedDescription></div>
+  <div class="w-3/4 flex justify-end gap-3 mb-10">
+    <button
+      (click)="router.navigate(['job', 'apply', job.id])"
+      class="btn-primary mt-5 px-3 py-1"
+      *ngIf="!authService.isAdmin()"
+    >
+      Apply
+    </button>
+    <button
+      class="btn-secondry mt-5 px-3 py-1"
+      (click)="router.navigate(['/'])"
+    >
+      Cancel
     </button>
   </div>
 </div>

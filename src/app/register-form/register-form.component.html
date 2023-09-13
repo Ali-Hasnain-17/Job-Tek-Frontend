@@ -1,191 +1,111 @@
-<div class="flex flex-col justify-center items-center mt-32">
-  <app-box>
+<div
+  class="flex flex-col justify-center items-center mt-20 md:w-3/4 w-full px-5 absolute left-1/2 -translate-x-1/2 pb-10"
+>
+  <div class="md:w-1/2 w-full shadow-md shadow-pink-600 p-5 rounded-lg">
     <div
-      class="text-center mb-5 text-3xl text-pink-600 uppercase tracking-widest"
+      class="heading-text text-center mb-5 md:text-4xl text-xl text-pink-600"
     >
       Register
     </div>
-    <div
-      class="mb-5 border border-red-700 bg-red-300 text-red-700 px-5 py-3 w-full text-center"
-      *ngIf="error"
-    >
-      {{ error }}
-    </div>
+    <div class="error-box" *ngIf="error">{{ error }}</div>
 
-    <form [formGroup]="registerForm" class="w-96" (ngSubmit)="register()">
+    <form [formGroup]="registerForm" class="w-full" (ngSubmit)="register()">
       <div class="form-field">
-        <label
-          for="fname"
-          [ngClass]="{
-            'error-text':
-              registerForm.controls['firstName'].invalid &&
-              registerForm.controls['firstName'].touched
-          }"
-        >
-          First Name
-        </label>
+        <label for="fname">First Name </label>
         <input
           type="text"
           id="fname"
           formControlName="firstName"
-          [ngClass]="{
-            'form-input': true,
-            'error-input':
-              registerForm.controls['firstName'].touched &&
-              registerForm.controls['firstName'].invalid
-          }"
+          class="form-input"
         />
         <small
-          [ngClass]="{ 'error-text':  registerForm.controls['firstName'].errors?.['required'] && registerForm.controls['firstName'].touched}"
-          *ngIf="
-                  registerForm.controls['firstName'].errors?.['required'] && registerForm.controls['firstName'].touched"
-          >First Name is Required</small
+          *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.errors?.['required']"
         >
+          First Name is Required
+        </small>
       </div>
       <div class="form-field">
-        <label
-          for="lname"
-          [ngClass]="{
-            'error-text':
-              registerForm.controls['lastName'].invalid &&
-              registerForm.controls['lastName'].touched
-          }"
-        >
-          Last Name
-        </label>
+        <label for="lname">Last Name </label>
         <input
           type="text"
           id="lname"
           formControlName="lastName"
-          [ngClass]="{
-            'form-input': true,
-            'error-input':
-              registerForm.controls['lastName'].touched &&
-              registerForm.controls['lastName'].invalid
-          }"
+          class="form-input"
         />
         <small
-          [ngClass]="{ 'error-text':  registerForm.controls['lastName'].errors?.['required'] && registerForm.controls['lastName'].touched}"
-          *ngIf="
-                  registerForm.controls['lastName'].errors?.['required'] && registerForm.controls['lastName'].touched"
-          >Last Name is Required</small
+          *ngIf="registerForm.get('lastName')?.touched && registerForm.get('lastName')?.errors?.['required']"
         >
+          Last Name is Required
+        </small>
       </div>
       <div class="form-field">
-        <label
-          for="email"
-          [ngClass]="{
-            'error-text':
-              registerForm.controls['email'].invalid &&
-              registerForm.controls['email'].touched
-          }"
-        >
-          Email
-        </label>
+        <label for="email">Email </label>
         <input
-          type="text"
+          type="email"
           id="email"
           formControlName="email"
-          [ngClass]="{
-            'form-input': true,
-            'error-input':
-              registerForm.controls['email'].touched &&
-              registerForm.controls['email'].invalid
-          }"
+          class="form-input"
         />
         <small
-          [ngClass]="{ 'error-text':  registerForm.controls['email'].errors?.['required'] && registerForm.controls['email'].touched}"
-          *ngIf="
-              registerForm.controls['email'].errors?.['required'] && registerForm.controls['email'].touched"
-          >Email is Required</small
+          *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['required']"
         >
+          Email is Required
+        </small>
         <small
-          [ngClass]="{ 'error-text':  registerForm.controls['email'].errors?.['email'] && registerForm.controls['email'].touched}"
-          *ngIf="
-            registerForm.controls['email'].errors?.['email'] && registerForm.controls['email'].touched"
-          >Invalid Email Format</small
+          *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['email']"
         >
+          Invalid Email
+        </small>
       </div>
       <div class="form-field">
-        <label
-          for="password"
-          [ngClass]="{
-            'error-text':
-              registerForm.controls['password'].invalid &&
-              registerForm.controls['password'].touched
-          }"
+        <label for="contactNumber">Contact Number </label>
+        <input
+          type="text"
+          id="contactNumber"
+          formControlName="contactNumber"
+          class="form-input"
+        />
+        <small
+          *ngIf="registerForm.get('contactNumber')?.touched && registerForm.get('contactNumber')?.errors?.['required']"
         >
-          Password
-        </label>
+          Contact Number is Required
+        </small>
+      </div>
+      <div class="form-field">
+        <label for="password">Password </label>
         <input
           type="password"
           id="password"
           formControlName="password"
-          [ngClass]="{
-            'form-input': true,
-            'error-input':
-              registerForm.controls['password'].touched &&
-              registerForm.controls['password'].invalid
-          }"
+          class="form-input"
         />
         <small
-          [ngClass]="{ 'error-text':  registerForm.controls['password'].errors?.['required'] && registerForm.controls['password'].touched}"
-          *ngIf="
-              registerForm.controls['password'].errors?.['required'] && registerForm.controls['password'].touched"
-          >Password is Required</small
+          *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['required']"
         >
+          Password is Required
+        </small>
       </div>
       <div class="form-field">
-        <label
-          for="cpassword"
-          [ngClass]="{
-            'error-text':
-            (registerForm.controls['confirmPassword'].touched &&
-            registerForm.controls['confirmPassword'].invalid) || (registerForm.errors?.['matchFields'] && registerForm.controls['confirmPassword'].touched)
-          }"
-        >
-          Confirm Password
-        </label>
+        <label for="cpassword">Confirm Password </label>
         <input
           type="password"
           id="cpassword"
           formControlName="confirmPassword"
-          [ngClass]="{
-            'form-input': true,
-            'error-input':
-              (registerForm.controls['confirmPassword'].touched &&
-              registerForm.controls['confirmPassword'].invalid) || (registerForm.errors?.['matchFields'] && registerForm.controls['confirmPassword'].touched)
-          }"
+          class="form-input"
         />
         <small
-          [ngClass]="{ 'error-text':  registerForm.controls['confirmPassword'].errors?.['required'] && registerForm.controls['confirmPassword'].touched}"
-          *ngIf="
-              registerForm.controls['confirmPassword'].errors?.['required']  && registerForm.controls['confirmPassword'].touched"
-          >Confirm Password is Required</small
+          *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.errors?.['required']"
         >
-        <small
-          [ngClass]="{ 'error-text':  registerForm.controls['confirmPassword'].errors?.['required'] && registerForm.controls['confirmPassword'].touched}"
-          *ngIf="
-              registerForm.controls['confirmPassword'].errors?.['required'] && registerForm.controls['confirmPassword'].touched"
-          >Confirm Password is Required</small
-        >
-        <small
-          [ngClass]="{ 'error-text': registerForm.errors?.['matchFields'] && registerForm.controls['confirmPassword'].touched
-    }"
-          *ngIf="
-            registerForm.errors?.['matchFields'] && registerForm.controls['confirmPassword'].touched
-          "
-        >
-          Passwords do not match.
+          Confirm Password is Required
         </small>
       </div>
       <button
         [disabled]="registerForm.invalid"
         type="submit"
-        class="bg-pink-600 text-white w-full p-2 rounded-full mt-5 disabled:bg-gray-200 disabled:text-gray-700 disabled:pointer-events-none hover:border hover:border-pink-600 hover:bg-white hover:text-pink-600"
+        class="btn-primary p-2 mt-5 w-full"
       >
         Register
       </button>
     </form>
-  </app-box>
+  </div>
 </div>
